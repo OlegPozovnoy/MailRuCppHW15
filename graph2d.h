@@ -9,6 +9,9 @@ using std::min;
 class Graph2D {
 public:
   Graph2D(vector<Point> points) : points(points) {}
+  Graph2D(const Graph2D& other) = delete;
+  Graph2D& operator=(Graph2D&& other) = delete;
+  Graph2D& operator=(const Graph2D& other) = delete;
   double calculate_path_length(vector<int> order);
   double get_min();
   void print();

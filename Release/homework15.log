@@ -1,0 +1,10 @@
+﻿  graph2d.cpp
+c:\users\oleg\source\repos\homework15\homework15\graph2d.cpp(25): warning C4018: '<': signed/unsigned mismatch
+  main.cpp
+  kruskal.cpp
+  point.cpp
+  statistics.cpp
+  Generating code
+  All 645 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  homework15.vcxproj -> C:\Users\Oleg\source\repos\homework15\Release\homework15.exe

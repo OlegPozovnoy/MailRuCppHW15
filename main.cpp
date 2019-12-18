@@ -25,10 +25,10 @@ double getIteratoin(int n) {
     vec.push_back(Point());
   }
   Graph2D graph(vec);
-  graph.print();
+  //graph.print();
 
   double optimal_result =  graph.get_min();
-  cout << "Optimal value" << optimal_result<<std::endl;
+  //cout << "Optimal value" << optimal_result<<std::endl;
 
   vector<veh> kruskal;
   for (int i = 0; i < n; i++) {
@@ -43,23 +43,29 @@ double getIteratoin(int n) {
   vector<veh> ostov = get_ostov(kruskal, n);
   vector<int> hamilton = get_hamilton_cycle_from_ostov(ostov,n);
   double ostov_result = graph.calculate_path_length(hamilton);
-  cout << "Ostov value" << ostov_result << std::endl;
+  //cout << "Ostov value" << ostov_result << std::endl;
   // возвращаем отклонение в процентах
   return (ostov_result/optimal_result - 1)*100;
 }
 
 int main()
 {
-  int n, size;
-  cout << "Введите число вершин графа:";
-  cin >> n;
-  cout << "Введите число итераций:";
-  cin >> size;
+  //int n;
+  int size = 100;
+  //cout << "Введите число вершин графа:";
+  //cin >> n;
+  //cout << "Введите число итераций:";
+  //cin >> size;
 
-  vector<double> experiment;
-  for (int i = 0; i < size; i++) {
-    experiment.push_back(getIteratoin(n));
+
+  for (int n = 3; n <= 10; n++) {
+    vector<double> experiment;
+    for (int i = 0; i < size; i++) {
+      experiment.push_back(getIteratoin(n));
+    }
+    Statistics stat(experiment);
+    cout << "For n = " << n << " "<< stat << std::endl;
   }
-  Statistics stat(experiment);
-  cout << stat;
+
+  getchar();
 }

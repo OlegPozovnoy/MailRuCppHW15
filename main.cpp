@@ -18,8 +18,9 @@ using std::cout;
 using std::cin;
 using std::queue;
 using std::map;
+using std::pair;
 
-double getIteratoin(int n) {
+pair<double, double> getIteratoin(int n) {
   vector<Point> vec;  
   for (int i = 0; i < n; i++) {
     vec.push_back(Point());
@@ -45,7 +46,7 @@ double getIteratoin(int n) {
   double ostov_result = graph.calculate_path_length(hamilton);
   //cout << "Ostov value" << ostov_result << std::endl;
   // возвращаем отклонение в процентах
-  return (ostov_result/optimal_result - 1)*100;
+  return std::make_pair(ostov_result,optimal_result);
 }
 
 int main()
@@ -59,12 +60,22 @@ int main()
 
 
   for (int n = 3; n <= 10; n++) {
-    vector<double> experiment;
+    vector<double> relative_pct;
+    vector<double> ostov_results;
+    vector<double> optimal_results;
     for (int i = 0; i < size; i++) {
-      experiment.push_back(getIteratoin(n));
+      pair<double, double> result = getIteratoin(n);
+      ostov_results.push_back(result.first);
+      optimal_results.push_back(result.second);
+      relative_pct.push_back((result.first / result.second - 1) * 100);
     }
-    Statistics stat(experiment);
-    cout << "For n = " << n << " "<< stat << std::endl;
+    Statistics relative_stat(relative_pct);
+    Statistics ostov_stat(ostov_results);
+    Statistics optimal_stat(optimal_results);
+    cout << "For n = " << n<< std::endl;
+    cout << "Ostov: " << ostov_stat;// << std::endl;
+    cout << "Optimal: " << optimal_stat;// << std::endl;
+    cout << "Pct.difference: " << relative_stat;// << std::endl;
   }
 
   getchar();
